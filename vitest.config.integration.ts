@@ -9,6 +9,7 @@ export default defineConfig({
     include: ['src/**/*.integration.spec.ts', 'tests/**/*.integration.spec.ts'],
     exclude: ['node_modules', 'dist'],
     globalSetup: ['./tests/global-setup.ts'],
+    fileParallelism: false,
     testTimeout: 30000,
     hookTimeout: 30000,
   },
