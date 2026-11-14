@@ -28,10 +28,17 @@
         <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">VSA Engine</span>
       </div>
       <div class="flex items-center space-x-6 text-sm font-medium text-slate-300">
-        <a href="#vsa-vs-layered" class="hover:text-indigo-400 transition-colors">VSA vs Layers</a>
-        <a href="#architecture-flow" class="hover:text-indigo-400 transition-colors">Event Pipeline</a>
-        <a href="#slices" class="hover:text-indigo-400 transition-colors">Slices</a>
-        <a href="#quickstart" class="hover:text-indigo-400 transition-colors">Quickstart</a>
+        <a href="#vsa-vs-layered" data-i18n="nav_vsa" class="hover:text-indigo-400 transition-colors">VSA vs Layers</a>
+        <a href="#architecture-flow" data-i18n="nav_pipeline" class="hover:text-indigo-400 transition-colors">Event Pipeline</a>
+        <a href="#slices" data-i18n="nav_slices" class="hover:text-indigo-400 transition-colors">Slices</a>
+        <a href="#quickstart" data-i18n="nav_quickstart" class="hover:text-indigo-400 transition-colors">Quickstart</a>
+        
+        <!-- Language Switcher Button -->
+        <button onclick="toggleLanguage()" class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-indigo-300 transition-all flex items-center space-x-1.5">
+          <span>🌐</span>
+          <span id="lang-indicator">ES</span>
+        </button>
+
         <a href="https://github.com/manuelguerreroi/pricepulse-vsa" target="_blank" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-all shadow-lg shadow-indigo-600/20 flex items-center space-x-2">
           <span>GitHub</span>
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
@@ -46,17 +53,17 @@
     <div class="max-w-5xl mx-auto text-center relative z-10">
       <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-slate-300 mb-8">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>MAANG Engineering Standards — 100% Verified Tests</span>
+        <span data-i18n="hero_badge">MAANG Engineering Standards — 100% Verified Tests</span>
       </div>
       <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white mb-6">
-        Enterprise E-Commerce Price Monitoring Under <span class="bg-gradient-to-r from-indigo-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent">Vertical Slice Architecture</span>
+        <span data-i18n="hero_title_prefix">Enterprise E-Commerce Price Monitoring Under</span> <span class="bg-gradient-to-r from-indigo-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent">Vertical Slice Architecture</span>
       </h1>
-      <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+      <p data-i18n="hero_subtitle" class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
         Zero cross-slice coupling, Transactional Outbox, NATS JetStream event streaming, distributed Valkey rate-limiting, and OpenTelemetry distributed tracing in NestJS.
       </p>
       
       <div class="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold">
-        <a href="#quickstart" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/25 transition-all">
+        <a href="#quickstart" data-i18n="hero_cta_quickstart" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/25 transition-all">
           Quickstart in 3 Minutes
         </a>
         <a href="http://localhost:3333/api/docs" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 transition-all flex items-center space-x-2">
@@ -72,19 +79,19 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800/80">
         <div class="text-3xl font-extrabold text-emerald-400">100%</div>
-        <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">Test Pass Rate (21/21)</div>
+        <div data-i18n="stat_tests" class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">Test Pass Rate (21/21)</div>
       </div>
       <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800/80">
         <div class="text-3xl font-extrabold text-indigo-400">0</div>
-        <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">Cross-Slice Imports</div>
+        <div data-i18n="stat_imports" class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">Cross-Slice Imports</div>
       </div>
       <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800/80">
         <div class="text-3xl font-extrabold text-sky-400">60s</div>
-        <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">AckWait JetStream</div>
+        <div data-i18n="stat_ack" class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">AckWait JetStream</div>
       </div>
       <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800/80">
         <div class="text-3xl font-extrabold text-purple-400">24h</div>
-        <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">Alert Fatigue Cooldown</div>
+        <div data-i18n="stat_cooldown" class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">Alert Fatigue Cooldown</div>
       </div>
     </div>
   </section>
@@ -92,8 +99,8 @@
   <!-- VSA vs Layered Architecture Section -->
   <section id="vsa-vs-layered" class="py-20 px-6 max-w-7xl mx-auto border-b border-slate-800">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-2">Architectural Philosophy</h2>
-      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Why Vertical Slices Beat Traditional Layered Systems</h3>
+      <h2 data-i18n="vsa_section_tag" class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-2">Architectural Philosophy</h2>
+      <h3 data-i18n="vsa_section_title" class="text-3xl sm:text-4xl font-extrabold text-white">Why Vertical Slices Beat Traditional Layered Systems</h3>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8">
@@ -101,20 +108,20 @@
       <div class="p-8 rounded-2xl bg-slate-900/60 border border-red-900/30 relative overflow-hidden">
         <div class="flex items-center space-x-3 mb-6">
           <span class="w-8 h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-sm">✕</span>
-          <h4 class="text-xl font-bold text-red-200">Traditional Layered / Clean Architecture</h4>
+          <h4 data-i18n="layered_title" class="text-xl font-bold text-red-200">Traditional Layered / Clean Architecture</h4>
         </div>
         <ul class="space-y-4 text-sm text-slate-400">
           <li class="flex items-start space-x-3">
             <span class="text-red-400 font-bold">•</span>
-            <span><strong>Artificial Horizontal Division:</strong> Adding one simple feature requires modifying Controllers, UseCases, Domain Entities, Repository Interfaces, and SQL Implementations.</span>
+            <span data-i18n="layered_point1"><strong>Artificial Horizontal Division:</strong> Adding one simple feature requires modifying Controllers, UseCases, Domain Entities, Repository Interfaces, and SQL Implementations.</span>
           </li>
           <li class="flex items-start space-x-3">
             <span class="text-red-400 font-bold">•</span>
-            <span><strong>AI Agent Merge Conflicts:</strong> When multiple AI agents or engineers touch shared generic repositories or services, merge conflicts explode.</span>
+            <span data-i18n="layered_point2"><strong>AI Agent Merge Conflicts:</strong> When multiple AI agents or engineers touch shared generic repositories or services, merge conflicts explode.</span>
           </li>
           <li class="flex items-start space-x-3">
             <span class="text-red-400 font-bold">•</span>
-            <span><strong>Bloated Generic Classes:</strong> "ProductService" ends up with 25 methods and 1,500 lines of entangled responsibilities.</span>
+            <span data-i18n="layered_point3"><strong>Bloated Generic Classes:</strong> "ProductService" ends up with 25 methods and 1,500 lines of entangled responsibilities.</span>
           </li>
         </ul>
       </div>
@@ -123,20 +130,20 @@
       <div class="p-8 rounded-2xl bg-slate-900/60 border border-emerald-900/30 relative overflow-hidden">
         <div class="flex items-center space-x-3 mb-6">
           <span class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-sm">✓</span>
-          <h4 class="text-xl font-bold text-emerald-200">PricePulse Vertical Slice Architecture (VSA)</h4>
+          <h4 data-i18n="vsa_title" class="text-xl font-bold text-emerald-200">PricePulse Vertical Slice Architecture (VSA)</h4>
         </div>
         <ul class="space-y-4 text-sm text-slate-400">
           <li class="flex items-start space-x-3">
             <span class="text-emerald-400 font-bold">•</span>
-            <span><strong>Self-Contained Use Cases:</strong> Slices encapsulate DTO (Zod), Endpoint, Handler (direct Drizzle SQL), and Module in one single folder.</span>
+            <span data-i18n="vsa_point1"><strong>Self-Contained Use Cases:</strong> Slices encapsulate DTO (Zod), Endpoint, Handler (direct Drizzle SQL), and Module in one single folder.</span>
           </li>
           <li class="flex items-start space-x-3">
             <span class="text-emerald-400 font-bold">•</span>
-            <span><strong>AI-First & Worktree Isolation:</strong> AI agents develop slices in parallel inside isolated Git Worktrees touching only their folder, with zero risk of merge collisions.</span>
+            <span data-i18n="vsa_point2"><strong>AI-First & Worktree Isolation:</strong> AI agents develop slices in parallel inside isolated Git Worktrees touching only their folder, with zero risk of merge collisions.</span>
           </li>
           <li class="flex items-start space-x-3">
             <span class="text-emerald-400 font-bold">•</span>
-            <span><strong>Compiler-Enforced Guardrails:</strong> <code>dependency-cruiser</code> automatically fails CI if any slice imports code from another slice.</span>
+            <span data-i18n="vsa_point3"><strong>Compiler-Enforced Guardrails:</strong> <code>dependency-cruiser</code> automatically fails CI if any slice imports code from another slice.</span>
           </li>
         </ul>
       </div>
@@ -146,9 +153,9 @@
   <!-- Interactive System Pipeline Section -->
   <section id="architecture-flow" class="py-20 px-6 max-w-7xl mx-auto border-b border-slate-800">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-xs font-bold uppercase tracking-widest text-sky-400 mb-2">Event-Driven Streaming</h2>
-      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">End-to-End Reactive Architecture</h3>
-      <p class="text-slate-400 mt-4 text-sm">Transactional Outbox, non-blocking SKIP LOCKED relay, and effectively-once idempotent delivery.</p>
+      <h2 data-i18n="pipeline_tag" class="text-xs font-bold uppercase tracking-widest text-sky-400 mb-2">Event-Driven Streaming</h2>
+      <h3 data-i18n="pipeline_title" class="text-3xl sm:text-4xl font-extrabold text-white">End-to-End Reactive Architecture</h3>
+      <p data-i18n="pipeline_subtitle" class="text-slate-400 mt-4 text-sm">Transactional Outbox, non-blocking SKIP LOCKED relay, and effectively-once idempotent delivery.</p>
     </div>
 
     <div class="bg-slate-900/70 p-8 rounded-3xl border border-slate-800 shadow-2xl overflow-x-auto">
@@ -169,7 +176,7 @@ sequenceDiagram
     DB-->>Catalog: Commit OK
     Catalog-->>User: 201 Created { id, url, status: 'ACTIVE' }
 
-    loop Every 250ms (Non-blocking)
+    loop Every 1000ms (Non-blocking)
         Relay->>DB: SELECT FOR UPDATE SKIP LOCKED outbox_events WHERE status = 'PENDING'
         Relay->>NATS: Publish to pricepulse.v1.events.price.dropped (W3C traceparent)
         Relay->>DB: UPDATE outbox_events SET status = 'PUBLISHED'
@@ -187,8 +194,8 @@ sequenceDiagram
   <!-- Slices Catalog Grid -->
   <section id="slices" class="py-20 px-6 max-w-7xl mx-auto border-b border-slate-800">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Production Catalog</h2>
-      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Implemented Vertical Slices</h3>
+      <h2 data-i18n="catalog_tag" class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Production Catalog</h2>
+      <h3 data-i18n="catalog_title" class="text-3xl sm:text-4xl font-extrabold text-white">Implemented Vertical Slices</h3>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
@@ -196,7 +203,7 @@ sequenceDiagram
       <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">
         <div class="text-xs font-semibold px-2 py-1 rounded bg-indigo-500/10 text-indigo-400 inline-block mb-4">HTTP Command</div>
         <h4 class="text-lg font-bold text-white mb-2">catalog/register-tracked-url</h4>
-        <p class="text-sm text-slate-400 mb-4">Validates URL with recursive Anti-SSRF, normalizes UTM parameters, extracts initial price, and emits atomic Outbox event.</p>
+        <p data-i18n="slice1_desc" class="text-sm text-slate-400 mb-4">Validates URL with recursive Anti-SSRF, normalizes UTM parameters, extracts initial price, and emits atomic Outbox event.</p>
         <div class="text-xs text-slate-500 font-mono">POST /api/catalog/products</div>
       </div>
 
@@ -204,7 +211,7 @@ sequenceDiagram
       <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">
         <div class="text-xs font-semibold px-2 py-1 rounded bg-sky-500/10 text-sky-400 inline-block mb-4">HTTP Command</div>
         <h4 class="text-lg font-bold text-white mb-2">alerts/create-user-alert</h4>
-        <p class="text-sm text-slate-400 mb-4">Enforces database-level uniqueness per user email on active alerts. Validates target price lower than current market price.</p>
+        <p data-i18n="slice2_desc" class="text-sm text-slate-400 mb-4">Enforces database-level uniqueness per user email on active alerts. Validates target price lower than current market price.</p>
         <div class="text-xs text-slate-500 font-mono">POST /api/alerts</div>
       </div>
 
@@ -212,7 +219,7 @@ sequenceDiagram
       <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">
         <div class="text-xs font-semibold px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 inline-block mb-4">Internal Command</div>
         <h4 class="text-lg font-bold text-white mb-2">ingestion/record-price-snapshot</h4>
-        <p class="text-sm text-slate-400 mb-4">Persists price history. Always updates product market price. Conditionally emits PriceDroppedEventV1 to Outbox only upon real drops.</p>
+        <p data-i18n="slice3_desc" class="text-sm text-slate-400 mb-4">Persists price history. Always updates product market price. Conditionally emits PriceDroppedEventV1 to Outbox only upon real drops.</p>
         <div class="text-xs text-slate-500 font-mono">POST /api/ingestion/snapshots</div>
       </div>
 
@@ -220,7 +227,7 @@ sequenceDiagram
       <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">
         <div class="text-xs font-semibold px-2 py-1 rounded bg-purple-500/10 text-purple-400 inline-block mb-4">BullMQ Job Worker</div>
         <h4 class="text-lg font-bold text-white mb-2">scraping/schedule-url-scrape</h4>
-        <p class="text-sm text-slate-400 mb-4">Distributed repeatable jobs running every 4h. Rate limiting (2 req/s) via Valkey. Transitions dead products (404) to INACTIVE.</p>
+        <p data-i18n="slice4_desc" class="text-sm text-slate-400 mb-4">Distributed repeatable jobs running every 4h. Rate limiting (2 req/s) via Valkey. Transitions dead products (404) to INACTIVE.</p>
         <div class="text-xs text-slate-500 font-mono">Queue: scraping-queue</div>
       </div>
 
@@ -228,7 +235,7 @@ sequenceDiagram
       <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all">
         <div class="text-xs font-semibold px-2 py-1 rounded bg-amber-500/10 text-amber-400 inline-block mb-4">NATS Consumer</div>
         <h4 class="text-lg font-bold text-white mb-2">notifications/notify-price-drop</h4>
-        <p class="text-sm text-slate-400 mb-4">Durable pull consumer with 60s AckWait. Enforces 24h notification fatigue cooldown and dispatches HTML emails via Mailpit.</p>
+        <p data-i18n="slice5_desc" class="text-sm text-slate-400 mb-4">Durable pull consumer with 60s AckWait. Enforces 24h notification fatigue cooldown and dispatches HTML emails via Mailpit.</p>
         <div class="text-xs text-slate-500 font-mono">Subject: pricepulse.v1.events.price.dropped</div>
       </div>
 
@@ -236,7 +243,7 @@ sequenceDiagram
       <div class="p-6 rounded-2xl bg-slate-900/60 border border-indigo-900/40 hover:border-indigo-700 transition-all">
         <div class="text-xs font-semibold px-2 py-1 rounded bg-indigo-500/20 text-indigo-300 inline-block mb-4">Golden Slice Blueprint</div>
         <h4 class="text-lg font-bold text-white mb-2">_template/health-check</h4>
-        <p class="text-sm text-slate-400 mb-4">Executes live coordinated ping across PostgreSQL (Drizzle), Valkey, and NATS JetStream. The canonical slice reference.</p>
+        <p data-i18n="slice_golden_desc" class="text-sm text-slate-400 mb-4">Executes live coordinated ping across PostgreSQL (Drizzle), Valkey, and NATS JetStream. The canonical slice reference.</p>
         <div class="text-xs text-slate-500 font-mono">GET /health/readiness &amp; liveness</div>
       </div>
     </div>
@@ -245,31 +252,31 @@ sequenceDiagram
   <!-- Quickstart Section -->
   <section id="quickstart" class="py-20 px-6 max-w-4xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-2">Developers</h2>
-      <h3 class="text-3xl font-extrabold text-white">Quickstart in 3 Minutes</h3>
+      <h2 data-i18n="qs_tag" class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-2">Developers</h2>
+      <h3 data-i18n="qs_title" class="text-3xl font-extrabold text-white">Quickstart in 3 Minutes</h3>
     </div>
 
     <div class="space-y-6">
       <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
-        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">1. Spin up Docker Infrastructure</div>
+        <div data-i18n="qs_step1" class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">1. Spin up Docker Infrastructure</div>
         <pre class="bg-slate-950 p-4 rounded-xl text-emerald-400 text-sm overflow-x-auto border border-slate-800"><code>pnpm docker:up
 # Starts Postgres 16, Valkey 8, NATS 2.10 (-js), Mailpit, and Jaeger</code></pre>
       </div>
 
       <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
-        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">2. Apply Drizzle Migrations</div>
+        <div data-i18n="qs_step2" class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">2. Apply Drizzle Migrations</div>
         <pre class="bg-slate-950 p-4 rounded-xl text-emerald-400 text-sm overflow-x-auto border border-slate-800"><code>pnpm db:migrate</code></pre>
       </div>
 
       <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
-        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">3. Run Comprehensive Test Suites</div>
+        <div data-i18n="qs_step3" class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">3. Run Comprehensive Test Suites</div>
         <pre class="bg-slate-950 p-4 rounded-xl text-emerald-400 text-sm overflow-x-auto border border-slate-800"><code>pnpm test               # Fast unit tests
 pnpm test:integration   # Real container integration tests (21 tests)
 pnpm depcruise          # Architecture governance check</code></pre>
       </div>
 
       <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
-        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">4. Start API Server (Port 3333)</div>
+        <div data-i18n="qs_step4" class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">4. Start API Server (Port 3333)</div>
         <pre class="bg-slate-950 p-4 rounded-xl text-emerald-400 text-sm overflow-x-auto border border-slate-800"><code>pnpm start:dev
 # Access Swagger UI at http://localhost:3333/api/docs</code></pre>
       </div>
@@ -280,6 +287,138 @@ pnpm depcruise          # Architecture governance check</code></pre>
   <footer class="py-12 px-6 border-t border-slate-800 text-center text-xs text-slate-500">
     <p>PricePulse VSA — MIT Licensed &bull; Created by <a href="https://github.com/manuelguerreroi" class="text-slate-400 hover:text-white underline">Manuel Guerrero Inostroza</a></p>
   </footer>
+
+  <!-- Internationalization (i18n) Client Script -->
+  <script>
+    const I18N = {
+      en: {
+        indicator: 'ES',
+        nav_vsa: 'VSA vs Layers',
+        nav_pipeline: 'Event Pipeline',
+        nav_slices: 'Slices',
+        nav_quickstart: 'Quickstart',
+        hero_badge: 'MAANG Engineering Standards — 100% Verified Tests',
+        hero_title_prefix: 'Enterprise E-Commerce Price Monitoring Under',
+        hero_subtitle: 'Zero cross-slice coupling, Transactional Outbox, NATS JetStream event streaming, distributed Valkey rate-limiting, and OpenTelemetry distributed tracing in NestJS.',
+        hero_cta_quickstart: 'Quickstart in 3 Minutes',
+        stat_tests: 'Test Pass Rate (21/21)',
+        stat_imports: 'Cross-Slice Imports',
+        stat_ack: 'AckWait JetStream',
+        stat_cooldown: 'Alert Fatigue Cooldown',
+        vsa_section_tag: 'Architectural Philosophy',
+        vsa_section_title: 'Why Vertical Slices Beat Traditional Layered Systems',
+        layered_title: 'Traditional Layered / Clean Architecture',
+        layered_point1: '<strong>Artificial Horizontal Division:</strong> Adding one simple feature requires modifying Controllers, UseCases, Domain Entities, Repository Interfaces, and SQL Implementations.',
+        layered_point2: '<strong>AI Agent Merge Conflicts:</strong> When multiple AI agents or engineers touch shared generic repositories or services, merge conflicts explode.',
+        layered_point3: '<strong>Bloated Generic Classes:</strong> "ProductService" ends up with 25 methods and 1,500 lines of entangled responsibilities.',
+        vsa_title: 'PricePulse Vertical Slice Architecture (VSA)',
+        vsa_point1: '<strong>Self-Contained Use Cases:</strong> Slices encapsulate DTO (Zod), Endpoint, Handler (direct Drizzle SQL), and Module in one single folder.',
+        vsa_point2: '<strong>AI-First & Worktree Isolation:</strong> AI agents develop slices in parallel inside isolated Git Worktrees touching only their folder, with zero risk of merge collisions.',
+        vsa_point3: '<strong>Compiler-Enforced Guardrails:</strong> <code>dependency-cruiser</code> automatically fails CI if any slice imports code from another slice.',
+        pipeline_tag: 'Event-Driven Streaming',
+        pipeline_title: 'End-to-End Reactive Architecture',
+        pipeline_subtitle: 'Transactional Outbox, non-blocking SKIP LOCKED relay, and effectively-once idempotent delivery.',
+        catalog_tag: 'Production Catalog',
+        catalog_title: 'Implemented Vertical Slices',
+        slice1_desc: 'Validates URL with recursive Anti-SSRF, normalizes UTM parameters, extracts initial price, and emits atomic Outbox event.',
+        slice2_desc: 'Enforces database-level uniqueness per user email on active alerts. Validates target price lower than current market price.',
+        slice3_desc: 'Persists price history. Always updates product market price. Conditionally emits PriceDroppedEventV1 to Outbox only upon real drops.',
+        slice4_desc: 'Distributed repeatable jobs running every 4h. Rate limiting (2 req/s) via Valkey. Transitions dead products (404) to INACTIVE.',
+        slice5_desc: 'Durable pull consumer with 60s AckWait. Enforces 24h notification fatigue cooldown and dispatches HTML emails via Mailpit.',
+        slice_golden_desc: 'Executes live coordinated ping across PostgreSQL (Drizzle), Valkey, and NATS JetStream. The canonical slice reference.',
+        qs_tag: 'Developers',
+        qs_title: 'Quickstart in 3 Minutes',
+        qs_step1: '1. Spin up Docker Infrastructure',
+        qs_step2: '2. Apply Drizzle Migrations',
+        qs_step3: '3. Run Comprehensive Test Suites',
+        qs_step4: '4. Start API Server (Port 3333)',
+      },
+      es: {
+        indicator: 'EN',
+        nav_vsa: 'VSA vs Capas',
+        nav_pipeline: 'Pipeline de Eventos',
+        nav_slices: 'Slices',
+        nav_quickstart: 'Inicio Rápido',
+        hero_badge: 'Estándares de Ingeniería MAANG — Tests 100% Verificados',
+        hero_title_prefix: 'Monitoreo de Precios de E-Commerce bajo',
+        hero_subtitle: 'Cero acoplamiento entre slices, Transactional Outbox, streaming de eventos con NATS JetStream, rate-limiting con Valkey y trazabilidad OpenTelemetry en NestJS.',
+        hero_cta_quickstart: 'Inicio Rápido en 3 Minutos',
+        stat_tests: 'Tasa de Aprobación en Tests (21/21)',
+        stat_imports: 'Imports entre Slices',
+        stat_ack: 'AckWait JetStream',
+        stat_cooldown: 'Cooldown de Fatiga de Alertas',
+        vsa_section_tag: 'Filosofía Arquitectónica',
+        vsa_section_title: 'Por Qué Vertical Slices Supera a las Capas Tradicionales',
+        layered_title: 'Arquitectura en Capas Tradicional / Clean Architecture',
+        layered_point1: '<strong>División Horizontal Artificial:</strong> Añadir una funcionalidad simple requiere modificar Controladores, Casos de Uso, Entidades de Dominio, Interfaces de Repositorio e Implementaciones SQL.',
+        layered_point2: '<strong>Conflictos de Merge con Agentes de IA:</strong> Cuando múltiples agentes o desarrolladores tocan repositorios o servicios genéricos compartidos, los conflictos de merge se disparan.',
+        layered_point3: '<strong>Clases Genéricas Sobrecargadas:</strong> "ProductService" termina con 25 métodos y 1.500 líneas de responsabilidades enredadas.',
+        vsa_title: 'PricePulse Vertical Slice Architecture (VSA)',
+        vsa_point1: '<strong>Casos de Uso Autocontenidos:</strong> Cada slice encapsula DTO (Zod), Endpoint, Handler (con SQL directo en Drizzle) y Módulo en una única carpeta.',
+        vsa_point2: '<strong>Diseñado para IA y Aislamiento en Worktrees:</strong> Los agentes de IA desarrollan slices en paralelo dentro de Git Worktrees aislados tocando solo su carpeta, con cero riesgo de colisiones.',
+        vsa_point3: '<strong>Reglas Blindadas por Compilación:</strong> <code>dependency-cruiser</code> rompe automáticamente el build si algún slice intenta importar código de otro slice.',
+        pipeline_tag: 'Streaming Basado en Eventos',
+        pipeline_title: 'Arquitectura Reactiva de Extremo a Extremo',
+        pipeline_subtitle: 'Transactional Outbox, relay concurrente no bloqueante con SKIP LOCKED y entrega idempotente effectively-once.',
+        catalog_tag: 'Catálogo de Producción',
+        catalog_title: 'Vertical Slices Implementados',
+        slice1_desc: 'Valida URL con Anti-SSRF recursivo, normaliza parámetros UTM, extrae precio inicial y emite evento atómico al Outbox.',
+        slice2_desc: 'Asegura unicidad en base de datos por email en alertas activas. Valida que el precio objetivo sea menor al precio actual.',
+        slice3_desc: 'Persiste historial de snapshots. Actualiza siempre el precio de mercado. Emite PriceDroppedEventV1 al Outbox solo ante caídas reales.',
+        slice4_desc: 'Tareas repetitivas distribuidas cada 4h en BullMQ. Limitación de tasa (2 req/s) en Valkey. Transiciona productos muertos (404) a INACTIVE.',
+        slice5_desc: 'Consumidor duradero con 60s AckWait. Aplica cooldown de 24h para evitar spam y despacha correos HTML mediante Mailpit.',
+        slice_golden_desc: 'Ejecuta ping coordinado en vivo sobre PostgreSQL (Drizzle), Valkey y NATS JetStream. El molde vivo de referencia.',
+        qs_tag: 'Desarrolladores',
+        qs_title: 'Inicio Rápido en 3 Minutos',
+        qs_step1: '1. Levantar Infraestructura Docker',
+        qs_step2: '2. Aplicar Migraciones Drizzle',
+        qs_step3: '3. Ejecutar Suites de Pruebas',
+        qs_step4: '4. Iniciar Servidor API (Puerto 3333)',
+      }
+    };
+
+    let currentLang = 'en';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const dict = I18N[lang] || I18N.en;
+      
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      const indicator = document.getElementById('lang-indicator');
+      if (indicator) {
+        indicator.textContent = dict.indicator;
+      }
+
+      document.documentElement.lang = lang;
+      localStorage.setItem('pricepulse_lang', lang);
+    }
+
+    function toggleLanguage() {
+      const targetLang = currentLang === 'en' ? 'es' : 'en';
+      applyLanguage(targetLang);
+    }
+
+    // Auto-detection on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('pricepulse_lang');
+      if (savedLang && (savedLang === 'en' || savedLang === 'es')) {
+        applyLanguage(savedLang);
+      } else {
+        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        if (browserLang.startsWith('es')) {
+          applyLanguage('es');
+        } else {
+          applyLanguage('en');
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>

@@ -1,6 +1,16 @@
 # PricePulse — Production-Grade VSA Engine
 
 <p align="center">
+  <strong>🌐 Language / Idioma:</strong> <strong>English</strong> | <a href="./README.es.md">Español</a>
+  &nbsp;&bull;&nbsp;
+  <a href="./CHANGELOG.md">Changelog</a>
+  &nbsp;&bull;&nbsp;
+  <a href="./CONTRIBUTING.md">Contributing</a>
+  &nbsp;&bull;&nbsp;
+  <a href="./SEED.md">Architecture SEED</a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Architecture-Vertical_Slice_(VSA)-blueviolet?style=for-the-badge" alt="VSA" />
   <img src="https://img.shields.io/badge/NestJS-10.x-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
   <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
