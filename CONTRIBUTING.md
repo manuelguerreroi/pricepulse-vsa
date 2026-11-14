@@ -1,5 +1,9 @@
 # Contributing to PricePulse
 
+<p align="center">
+  <strong>🌐 Language / Idioma:</strong> <strong>English</strong> | <a href="./CONTRIBUTING.es.md">Español</a>
+</p>
+
 Thank you for your interest in contributing to **PricePulse**! This guide outlines our engineering workflow, architectural constraints, and contribution protocols.
 
 ---
