@@ -11,6 +11,7 @@
 </p>
 
 <p align="center">
+  <img src="https://github.com/manuelguerreroi/pricepulse-vsa/actions/workflows/ci.yml/badge.svg" alt="Estado CI" />
   <img src="https://img.shields.io/badge/Arquitectura-Vertical_Slice_(VSA)-blueviolet?style=for-the-badge" alt="VSA" />
   <img src="https://img.shields.io/badge/NestJS-10.x-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
   <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />

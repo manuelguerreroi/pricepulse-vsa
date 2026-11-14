@@ -1,0 +1,102 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-and-verify:
+    name: Build, Test & Architecture Verification
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: pricepulse
+          POSTGRES_PASSWORD: pricepulse_secret
+          POSTGRES_DB: pricepulse
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U pricepulse -d pricepulse"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+      valkey:
+        image: valkey/valkey:8-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "valkey-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+      nats:
+        image: nats:2.10-alpine
+        ports:
+          - 4222:4222
+          - 8222:8222
+        options: >-
+          -js -sd /data -m 8222
+
+      mailpit:
+        image: axllent/mailpit:latest
+        ports:
+          - 1025:1025
+          - 8025:8025
+
+      jaeger:
+        image: jaegertracing/all-in-one:1.57
+        env:
+          COLLECTOR_OTLP_ENABLED: "true"
+        ports:
+          - 16686:16686
+          - 4318:4318
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.8.0
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Database Migrations
+        run: pnpm db:migrate
+        env:
+          DATABASE_URL: postgres://pricepulse:pricepulse_secret@localhost:5432/pricepulse
+
+      - name: Run Unit Tests
+        run: pnpm test
+
+      - name: Run Integration Tests
+        run: pnpm test:integration
+        env:
+          DATABASE_URL: postgres://pricepulse:pricepulse_secret@localhost:5432/pricepulse
+          VALKEY_URL: redis://localhost:6379
+          NATS_URL: nats://localhost:4222
+          MAILPIT_HTTP_URL: http://127.0.0.1:8025/api/v1/send
+
+      - name: Verify Architecture Rules (Dependency Cruiser)
+        run: pnpm depcruise
+
+      - name: Build Production Bundle
+        run: pnpm build

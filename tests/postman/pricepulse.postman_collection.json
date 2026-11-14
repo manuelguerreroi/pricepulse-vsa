@@ -1,0 +1,210 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "name": "PricePulse VSA API",
+    "description": "Automated E2E collection testing the complete Vertical Slice Architecture lifecycle of PricePulse: Healthcheck -> Product Registration -> User Alert -> Price Drop Ingestion -> Mailpit Notification.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3333",
+      "type": "string"
+    },
+    {
+      "key": "productId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "alertId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Healthcheck Readiness",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('All infrastructure services are ok', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json.status).to.eql('ready');",
+              "    pm.expect(json.checks.postgres).to.eql('ok');",
+              "    pm.expect(json.checks.valkey).to.eql('ok');",
+              "    pm.expect(json.checks.nats).to.eql('ok');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health/readiness",
+          "host": ["{{baseUrl}}"],
+          "path": ["health", "readiness"]
+        }
+      }
+    },
+    {
+      "name": "2. Register Tracked Product",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201 Created', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test('Captures product ID and initial price', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('id');",
+              "    pm.expect(json.status).to.eql('ACTIVE');",
+              "    pm.collectionVariables.set('productId', json.id);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://mercadolibre.cl/p/MLC-POSTMAN-DEMO?mock_price=100000\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/catalog/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "catalog", "products"]
+        }
+      }
+    },
+    {
+      "name": "3. Create User Price Alert",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201 Created', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test('Alert is active and tied to product', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json.isActive).to.be.true;",
+              "    pm.expect(json.targetPriceMinorUnits).to.eql(80000);",
+              "    pm.collectionVariables.set('alertId', json.id);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userEmail\": \"tester@gmail.com\",\n  \"productId\": \"{{productId}}\",\n  \"targetPriceMinorUnits\": 80000\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/alerts",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "alerts"]
+        }
+      }
+    },
+    {
+      "name": "4. Ingest Price Drop Snapshot",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201 Created', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "pm.test('Detects 25% price drop and triggers Outbox event', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json.isPriceDrop).to.be.true;",
+              "    pm.expect(json.dropPercentage).to.eql(25);",
+              "    pm.expect(json.newPriceMinorUnits).to.eql(75000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": \"{{productId}}\",\n  \"newPriceMinorUnits\": 75000\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/ingestion/snapshots",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "ingestion", "snapshots"]
+        }
+      }
+    },
+    {
+      "name": "5. Verify Mailpit Notification Delivery",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Mailpit responded 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Message received in mailbox', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json.total).to.be.above(0);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8025/api/v1/messages",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8025",
+          "path": ["api", "v1", "messages"]
+        }
+      }
+    }
+  ]
+}
