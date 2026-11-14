@@ -183,8 +183,10 @@ pnpm start:dev
 | Herramienta / Interfaz | URL Local | Propósito |
 |---|---|---|
 | **Swagger UI** | [http://localhost:3333/api/docs](http://localhost:3333/api/docs) | Exploración y ejecución interactiva de la API |
+| **Dashboard Grafana** | [http://localhost:3100](http://localhost:3100) | Panel unificado preconfigurado con métricas, trazas Jaeger y datos de Postgres |
 | **Buzón Mailpit** | [http://localhost:8025](http://localhost:8025) | Bandeja de entrada visual de correos HTML en tiempo real |
 | **Trazas Jaeger** | [http://localhost:16686](http://localhost:16686) | Gráficos en cascada de trazas OpenTelemetry |
+| **Prometheus** | [http://localhost:9090](http://localhost:9090) | Motor de métricas y recolector Prometheus |
 | **Consola NATS** | [http://localhost:8222](http://localhost:8222) | Monitoreo en vivo de JetStream y métricas de mensajes |
 | **Drizzle Studio** | `pnpm db:studio` -> [http://localhost:4983](http://localhost:4983) | Explorador visual de base de datos PostgreSQL |
 

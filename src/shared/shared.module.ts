@@ -6,13 +6,17 @@ import { NatsBootstrapService } from './infra/nats/nats-bootstrap.service';
 import { OutboxRelayService } from './infra/outbox/outbox-relay.service';
 import { MailpitAdapter } from './infra/notifications/mailpit.adapter';
 import { NOTIFICATION_PORT } from './ports/notification.port';
+import { MetricsService } from './infra/observability/metrics.service';
+import { MetricsController } from './infra/observability/metrics.controller';
 
 @Global()
 @Module({
   imports: [DatabaseModule, ValkeyModule, NatsModule],
+  controllers: [MetricsController],
   providers: [
     NatsBootstrapService,
     OutboxRelayService,
+    MetricsService,
     {
       provide: NOTIFICATION_PORT,
       useClass: MailpitAdapter,
@@ -24,6 +28,7 @@ import { NOTIFICATION_PORT } from './ports/notification.port';
     NatsModule,
     NatsBootstrapService,
     OutboxRelayService,
+    MetricsService,
     NOTIFICATION_PORT,
   ],
 })
