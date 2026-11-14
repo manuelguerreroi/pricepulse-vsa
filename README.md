@@ -20,6 +20,8 @@
   <img src="https://img.shields.io/badge/Valkey-8.x_(BullMQ)-CC292B?style=for-the-badge&logo=redis&logoColor=white" alt="Valkey" />
   <img src="https://img.shields.io/badge/Drizzle_ORM-0.38-C5F74F?style=for-the-badge&logo=drizzle&logoColor=black" alt="Drizzle" />
   <img src="https://img.shields.io/badge/OpenTelemetry-Tracing-4D88D7?style=for-the-badge&logo=opentelemetry&logoColor=white" alt="OpenTelemetry" />
+  <img src="https://img.shields.io/badge/Grafana-10.x_(Dashboard)-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana" />
+  <img src="https://img.shields.io/badge/Prometheus-2.51_(Metrics)-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" alt="Prometheus" />
   <img src="https://img.shields.io/badge/Vitest-Unit_%26_Integration-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest" />
 </p>
 

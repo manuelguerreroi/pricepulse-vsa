@@ -11,6 +11,24 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.0] - 2026-11-14
+
+### Añadido
+- **Observabilidad Unificada con Grafana y Prometheus:**
+  - Integración de `prom-client` en `MetricsService` exponiendo métricas estándar en `GET /metrics`.
+  - Configuración del servidor Prometheus en Docker en el puerto `9090` recolectando métricas cada 5 segundos.
+  - Aprovisionamiento automático de Grafana en el puerto `3100` (`pricepulse-dashboard.json`) unificando métricas de Prometheus, trazas de Jaeger y datos relacionales de PostgreSQL con acceso de administrador sin fricción.
+- **Pipeline de Integración Continua (CI/CD):**
+  - Workflow de GitHub Actions (`.github/workflows/ci.yml`) ejecutando Docker Compose, migraciones de base de datos, pruebas unitarias, pruebas de integración reales, linter de arquitectura y compilación de producción en cada push y PR.
+- **Slice de Desuscripción con 1 Clic:**
+  - Implementación del slice `alerts/unsubscribe-user-alert` (`GET /api/alerts/unsubscribe?alertId=...`) con desactivación atómica idempotente y respuestas RFC 7807.
+  - Se añadieron 3 pruebas de integración elevando el total a 24 pruebas de integración reales sobre 7 suites de prueba.
+- **Colección Automatizada de Postman:**
+  - Colección E2E de 5 pasos en `tests/postman/pricepulse.postman_collection.json` con scripts de aserción automáticos.
+- **Documentación Swagger Enriquecida:**
+  - Aplicación de `patchNestJsSwagger()` de `nestjs-zod` en `main.ts`.
+  - Enriquecimiento de esquemas Zod con descripciones detalladas y ejemplos reales listos para probar (`@ApiBody`).
+
 ## [1.0.0] - 2026-11-13
 
 ### Añadido
