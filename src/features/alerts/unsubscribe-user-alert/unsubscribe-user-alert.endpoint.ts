@@ -11,7 +11,13 @@ export class UnsubscribeUserAlertEndpoint {
 
   @Get()
   @ApiOperation({ summary: 'One-click unsubscribe from a price alert' })
-  @ApiQuery({ name: 'alertId', required: true, type: String })
+  @ApiQuery({
+    name: 'alertId',
+    required: true,
+    type: String,
+    description: 'UUID of the user alert to deactivate',
+    example: '526c7061-09c5-4c1f-bae7-f4a831774cd9',
+  })
   @ApiResponse({ status: 200, type: UnsubscribeResponseDto })
   @ApiResponse({ status: 404, description: 'Alert not found' })
   async handle(

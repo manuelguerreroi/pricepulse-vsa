@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Headers, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiTags, ApiOperation, ApiResponse, ApiHeader } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiHeader, ApiBody } from '@nestjs/swagger';
 import { RegisterTrackedUrlHandler, ProductAlreadyTrackedError, ScrapingFailedError } from './register-tracked-url.handler';
 import { RegisterTrackedUrlDto, TrackedProductResponseDto } from './register-tracked-url.dto';
 import { InvalidUrlError } from '@shared/domain/tracked-url.vo';
@@ -14,6 +14,24 @@ export class RegisterTrackedUrlEndpoint {
   @Post()
   @ApiOperation({ summary: 'Register a new e-commerce URL for price tracking' })
   @ApiHeader({ name: 'x-trace-id', required: false, description: 'Optional correlation/trace ID' })
+  @ApiBody({
+    type: RegisterTrackedUrlDto,
+    description: 'E-commerce URL payload to register',
+    examples: {
+      mercadolibre: {
+        summary: 'MercadoLibre product with simulated mock price ($100.000 CLP)',
+        value: {
+          url: 'https://mercadolibre.cl/p/MLC12345?mock_price=100000',
+        },
+      },
+      usdProduct: {
+        summary: 'USD product with simulated mock price ($49.99 USD)',
+        value: {
+          url: 'https://amazon.com/dp/B08N5WRWNW?mock_price=4999&mock_currency=USD',
+        },
+      },
+    },
+  })
   @ApiResponse({ status: 201, type: TrackedProductResponseDto })
   @ApiResponse({ status: 400, description: 'Invalid URL or Anti-SSRF violation' })
   @ApiResponse({ status: 409, description: 'Product is already tracked' })

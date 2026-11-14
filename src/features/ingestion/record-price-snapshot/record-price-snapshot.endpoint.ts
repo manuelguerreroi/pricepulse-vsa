@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Headers, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiTags, ApiOperation, ApiResponse, ApiHeader } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiHeader, ApiBody } from '@nestjs/swagger';
 import { RecordPriceSnapshotHandler, ProductNotFoundError, InvalidPriceError } from './record-price-snapshot.handler';
 import { RecordPriceSnapshotDto, RecordPriceSnapshotResponseDto } from './record-price-snapshot.dto';
 
@@ -12,6 +12,26 @@ export class RecordPriceSnapshotEndpoint {
   @Post()
   @ApiOperation({ summary: 'Record a new price snapshot and emit price drop event if applicable' })
   @ApiHeader({ name: 'x-trace-id', required: false, description: 'Correlation / Trace ID' })
+  @ApiBody({
+    type: RecordPriceSnapshotDto,
+    description: 'New scraped price snapshot payload',
+    examples: {
+      priceDrop: {
+        summary: 'Simulated 25% price drop ($75.000 CLP)',
+        value: {
+          productId: '17f9bc8d-5c8a-4824-ac65-fec1f0c1cf1e',
+          newPriceMinorUnits: 75000,
+        },
+      },
+      priceIncrease: {
+        summary: 'Simulated price increase ($120.000 CLP)',
+        value: {
+          productId: '17f9bc8d-5c8a-4824-ac65-fec1f0c1cf1e',
+          newPriceMinorUnits: 120000,
+        },
+      },
+    },
+  })
   @ApiResponse({ status: 201, type: RecordPriceSnapshotResponseDto })
   @ApiResponse({ status: 400, description: 'Validation error or invalid price' })
   @ApiResponse({ status: 404, description: 'Tracked product not found' })

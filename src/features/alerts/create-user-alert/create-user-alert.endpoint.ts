@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { CreateUserAlertHandler, ProductNotFoundError, ActiveAlertAlreadyExistsError, InvalidTargetPriceError } from './create-user-alert.handler';
 import { CreateUserAlertDto, UserAlertResponseDto } from './create-user-alert.dto';
 
@@ -11,6 +11,20 @@ export class CreateUserAlertEndpoint {
 
   @Post()
   @ApiOperation({ summary: 'Create a price drop alert subscription for a tracked product' })
+  @ApiBody({
+    type: CreateUserAlertDto,
+    description: 'Alert subscription payload with user email and target price threshold',
+    examples: {
+      sampleAlert: {
+        summary: 'Target price alert at $80.000 CLP',
+        value: {
+          userEmail: 'comprador@gmail.com',
+          productId: '17f9bc8d-5c8a-4824-ac65-fec1f0c1cf1e',
+          targetPriceMinorUnits: 80000,
+        },
+      },
+    },
+  })
   @ApiResponse({ status: 201, type: UserAlertResponseDto })
   @ApiResponse({ status: 400, description: 'Invalid target price or validation error' })
   @ApiResponse({ status: 404, description: 'Tracked product not found' })

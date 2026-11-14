@@ -9,8 +9,11 @@ otelSdk.start();
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ZodValidationPipe } from 'nestjs-zod';
+import { ZodValidationPipe, patchNestJsSwagger } from 'nestjs-zod';
 import { AppModule } from './app.module';
+
+// Patch @nestjs/swagger to support nestjs-zod DTO schemas and reflection
+patchNestJsSwagger();
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
