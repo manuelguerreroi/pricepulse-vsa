@@ -1,4 +1,4 @@
-import { Injectable, Inject, Logger } from '@nestjs/common';
+import { Injectable, Inject, OnApplicationBootstrap, OnApplicationShutdown, Logger } from '@nestjs/common';
 import { sql, eq } from 'drizzle-orm';
 import { JetStreamClient, headers, StringCodec } from 'nats';
 import { DRIZZLE_DB, DrizzleDb } from '../database/database.module';
@@ -13,13 +13,55 @@ const SUBJECT_MAP: Record<string, string> = {
 };
 
 @Injectable()
-export class OutboxRelayService {
+export class OutboxRelayService implements OnApplicationBootstrap, OnApplicationShutdown {
   private readonly logger = new Logger(OutboxRelayService.name);
+  private loopTimer: NodeJS.Timeout | null = null;
+  private isPolling = false;
 
   constructor(
     @Inject(DRIZZLE_DB) private readonly db: DrizzleDb,
     @Inject(NATS_JETSTREAM) private readonly js: JetStreamClient,
   ) {}
+
+  onApplicationBootstrap() {
+    this.startRelayLoop(1000); // Default 1-second polling interval
+  }
+
+  onApplicationShutdown() {
+    this.stopRelayLoop();
+  }
+
+  /**
+   * Starts the continuous background polling loop.
+   */
+  startRelayLoop(intervalMs = 1000): void {
+    if (this.loopTimer) return;
+
+    this.loopTimer = setInterval(async () => {
+      if (this.isPolling) return;
+      this.isPolling = true;
+
+      try {
+        await this.processPendingEvents();
+      } catch (error) {
+        this.logger.error('Error in outbox relay loop:', error);
+      } finally {
+        this.isPolling = false;
+      }
+    }, intervalMs);
+
+    this.logger.log(`Outbox Relay polling loop active (every ${intervalMs}ms).`);
+  }
+
+  /**
+   * Stops the background polling loop cleanly.
+   */
+  stopRelayLoop(): void {
+    if (this.loopTimer) {
+      clearInterval(this.loopTimer);
+      this.loopTimer = null;
+    }
+  }
 
   /**
    * Polls and publishes eligible pending outbox events using SKIP LOCKED for safe concurrent scaling.
